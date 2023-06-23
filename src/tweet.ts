@@ -18,9 +18,7 @@ export async function tweet(
   }).v2
 
   const parameters = {
-    media: {
-      media_ids: mediaIds
-    },
+    media: mediaIds.length > 0 ? {media_ids: mediaIds} : undefined,
     quote_tweet_id: inReplyToStatusId !== '' ? inReplyToStatusId : undefined
   }
   return await client.tweet(status, parameters)
