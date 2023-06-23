@@ -99,14 +99,13 @@ function tweet(status, mediaIds = [], inReplyToStatusId = '') {
             appSecret,
             accessToken,
             accessSecret
-        }).v1;
-        const parameters = {};
-        if (mediaIds.length > 0) {
-            parameters['media_ids'] = mediaIds.join(',');
-        }
-        if (inReplyToStatusId !== '') {
-            parameters['in_reply_to_status_id'] = inReplyToStatusId;
-        }
+        }).v2;
+        const parameters = {
+            media: {
+                media_ids: mediaIds
+            },
+            quote_tweet_id: inReplyToStatusId !== '' ? inReplyToStatusId : undefined
+        };
         return yield client.tweet(status, parameters);
     });
 }
